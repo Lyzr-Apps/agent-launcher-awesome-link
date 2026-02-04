@@ -1,0 +1,61 @@
+{
+  "agent_name": "Web Research Agent",
+  "agent_id": "6982de51e35d4557a9b57844",
+  "agent_purpose": "research",
+  "description": "Real-time Competitive Web Intelligence Specialist that gathers latest news and updates about competitors",
+  "response_schema": {
+    "status": "string (success|error)",
+    "result": {
+      "answer": "string",
+      "sources": [
+        {
+          "title": "string",
+          "url": "string (optional)",
+          "relevance": "number (0-1)"
+        }
+      ],
+      "confidence": "number (0-1)",
+      "related_topics": [
+        "string"
+      ],
+      "follow_up_questions": [
+        "string (optional)"
+      ]
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string (ISO)"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "answer": "Based on the research, the answer is...",
+      "sources": [
+        {
+          "title": "Source Document",
+          "url": "https://example.com",
+          "relevance": 0.95
+        }
+      ],
+      "confidence": 0.88,
+      "related_topics": [
+        "Topic A",
+        "Topic B"
+      ],
+      "follow_up_questions": [
+        "What about X?",
+        "How does Y affect this?"
+      ]
+    },
+    "metadata": {
+      "agent_name": "Web Research Agent",
+      "timestamp": "2025-01-15T10:30:00Z"
+    }
+  },
+  "is_actual_tested": false,
+  "test_timestamp": null,
+  "test_message_used": "Research a sample topic for testing",
+  "raw_test_response": "Please provide the name of a competitor or a specific topic you want researched, and I will gather the latest news, updates, and market signals for that entity.",
+  "test_error": "Response not valid JSON: Expecting value: line 1 column 1 (char 0)"
+}

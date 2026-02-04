@@ -1,0 +1,75 @@
+{
+  "workflow_status": "complete",
+  "workflow_name": "Competitive Intelligence Agent System",
+  "workflow_type": "manager_subagent",
+  "created_at": "2026-02-04T00:00:00Z",
+  "agents_created": {
+    "total": 4,
+    "manager": 1,
+    "subagents": 3,
+    "agents": [
+      {
+        "name": "CI Orchestrator Manager",
+        "agent_id": "6982de831ae7615e896e00f5",
+        "type": "manager",
+        "status": "created",
+        "schema_saved": true,
+        "manages": [
+          "6982de51e35d4557a9b57844",
+          "6982de391d2d8a7bf2fe5b09",
+          "6982de631ae7615e896e00f0"
+        ]
+      },
+      {
+        "name": "Web Research Agent",
+        "agent_id": "6982de51e35d4557a9b57844",
+        "type": "subagent",
+        "status": "created",
+        "schema_saved": true,
+        "tools": ["perplexity_search"]
+      },
+      {
+        "name": "Product Intelligence Agent",
+        "agent_id": "6982de391d2d8a7bf2fe5b09",
+        "type": "subagent",
+        "status": "created",
+        "schema_saved": true,
+        "has_knowledge_base": true,
+        "rag_id": "6982de2d7311df9b1f064397"
+      },
+      {
+        "name": "Market Signals Agent",
+        "agent_id": "6982de631ae7615e896e00f0",
+        "type": "subagent",
+        "status": "created",
+        "schema_saved": true,
+        "tools": ["perplexity_reasoning"]
+      }
+    ]
+  },
+  "knowledge_bases": {
+    "total": 1,
+    "knowledge_bases": [
+      {
+        "name": "Competitor Profiles",
+        "rag_id": "6982de2d7311df9b1f064397",
+        "collection_name": "competitorprofilesru1x",
+        "used_by": ["Product Intelligence Agent"]
+      }
+    ]
+  },
+  "files_created": {
+    "workflow_json": "/app/project/workflow.json",
+    "response_schemas": [
+      "/app/project/response_schemas/ci_orchestrator_manager_response.json",
+      "/app/project/response_schemas/web_research_agent_response.json",
+      "/app/project/response_schemas/product_intelligence_agent_response.json",
+      "/app/project/response_schemas/market_signals_agent_response.json"
+    ]
+  },
+  "next_steps": [
+    "Agent testing will be handled by agent_testing sub-agent",
+    "UI generation will be handled by UI Generator",
+    "Upload competitor documentation to Knowledge Base (rag_id: 6982de2d7311df9b1f064397)"
+  ]
+}

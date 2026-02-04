@@ -1,0 +1,15 @@
+{
+  "agent_name": "Web Research Agent",
+  "agent_id": "6982de51e35d4557a9b57844",
+  "test_message": "Find latest news and updates about LangChain",
+  "expected_purpose": "research",
+  "timestamp": "2026-02-04T05:54:14.771906",
+  "is_valid_json": false,
+  "validation_errors": [
+    "Response is not valid JSON: Expecting value: line 1 column 1 (char 0)"
+  ],
+  "actual_response": {
+    "raw_text": "```json\n{\n  \"status\": \"success\",\n  \"result\": {\n    \"latest_news\": \"LangChain has launched a new feature that enhances API interactions, making it easier for developers to integrate machine learning models into their applications.\",\n    \"product_updates\": \"The latest version of LangChain includes improved document processing capabilities and support for more programming languages.\",\n    \"strategic_moves\": \"LangChain has announced a new partnership with a leading cloud services provider to expand its infrastructure capabilities.\",\n    \"social_signals\": \"Executives from LangChain have been actively engaging on Twitter, discussing the positive feedback received from the developer community on recent updates.\"\n  },\n  \"metadata\": {\n    \"agent_name\": \"Web Research Agent\",\n    \"timestamp\": \"2023-10-07T15:02:00Z\"\n  }\n}\n```"
+  },
+  "raw_response": "```json\n{\n  \"status\": \"success\",\n  \"result\": {\n    \"latest_news\": \"LangChain has launched a new feature that enhances API interactions, making it easier for developers to integrate machine learning models into their applications.\",\n    \"product_updates\": \"The latest version of LangChain includes improved document processing capabilities and support for more programming languages.\",\n    \"strategic_moves\": \"LangChain has announced a new partnership with a leading cloud services provider to expand its infrastructure capabilities.\",\n    \"social_signals\": \"Executives from LangChain have been actively engaging on Twitter, discussing the positive feedback received from the developer community on recent updates.\"\n  },\n  \"metadata\": {\n    \"agent_name\": \"Web Research Agent\",\n    \"timestamp\": \"2023-10-07T15:02:00Z\"\n  }\n}\n```"
+}

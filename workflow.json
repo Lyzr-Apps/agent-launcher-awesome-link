@@ -1,0 +1,212 @@
+{
+  "workflow_name": "Competitive Intelligence Agent System",
+  "workflow_description": "Manager-Subagent orchestration for comprehensive competitive intelligence analysis",
+  "workflow_type": "manager_subagent",
+  "nodes": [
+    {
+      "id": "user_input",
+      "type": "Input",
+      "label": "Competitor Analysis Request",
+      "nodeCategory": "input",
+      "position": {
+        "x": 100,
+        "y": 200
+      }
+    },
+    {
+      "id": "ci_orchestrator_manager",
+      "type": "Agent",
+      "label": "CI Orchestrator Manager",
+      "nodeCategory": "agent",
+      "agent_id": "6982de831ae7615e896e00f5",
+      "agent_name": "CI Orchestrator Manager",
+      "agent_type": "manager",
+      "position": {
+        "x": 400,
+        "y": 200
+      }
+    },
+    {
+      "id": "web_research_agent",
+      "type": "Agent",
+      "label": "Web Research Agent",
+      "nodeCategory": "agent",
+      "agent_id": "6982de51e35d4557a9b57844",
+      "agent_name": "Web Research Agent",
+      "agent_type": "subagent",
+      "position": {
+        "x": 700,
+        "y": 50
+      }
+    },
+    {
+      "id": "product_intelligence_agent",
+      "type": "Agent",
+      "label": "Product Intelligence Agent",
+      "nodeCategory": "agent",
+      "agent_id": "6982de391d2d8a7bf2fe5b09",
+      "agent_name": "Product Intelligence Agent",
+      "agent_type": "subagent",
+      "has_knowledge_base": true,
+      "rag_id": "6982de2d7311df9b1f064397",
+      "position": {
+        "x": 700,
+        "y": 200
+      }
+    },
+    {
+      "id": "market_signals_agent",
+      "type": "Agent",
+      "label": "Market Signals Agent",
+      "nodeCategory": "agent",
+      "agent_id": "6982de631ae7615e896e00f0",
+      "agent_name": "Market Signals Agent",
+      "agent_type": "subagent",
+      "position": {
+        "x": 700,
+        "y": 350
+      }
+    },
+    {
+      "id": "intelligence_report_output",
+      "type": "Output",
+      "label": "Competitive Intelligence Report",
+      "nodeCategory": "end",
+      "position": {
+        "x": 1000,
+        "y": 200
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "user_input",
+      "target": "ci_orchestrator_manager",
+      "label": "Competitor name"
+    },
+    {
+      "source": "ci_orchestrator_manager",
+      "target": "web_research_agent",
+      "label": "Delegate: Latest news"
+    },
+    {
+      "source": "ci_orchestrator_manager",
+      "target": "product_intelligence_agent",
+      "label": "Delegate: Product analysis"
+    },
+    {
+      "source": "ci_orchestrator_manager",
+      "target": "market_signals_agent",
+      "label": "Delegate: Predictions"
+    },
+    {
+      "source": "web_research_agent",
+      "target": "intelligence_report_output",
+      "label": "Latest activity"
+    },
+    {
+      "source": "product_intelligence_agent",
+      "target": "intelligence_report_output",
+      "label": "Product insights"
+    },
+    {
+      "source": "market_signals_agent",
+      "target": "intelligence_report_output",
+      "label": "Strategic predictions"
+    }
+  ],
+  "agents": [
+    {
+      "agent_id": "6982de831ae7615e896e00f5",
+      "name": "CI Orchestrator Manager",
+      "type": "manager",
+      "description": "Competitive Intelligence Coordinator",
+      "role": "Competitive Intelligence Coordinator",
+      "goal": "Coordinate comprehensive competitive intelligence analysis by orchestrating specialized research agents",
+      "provider": "OpenAI",
+      "model": "gpt-4o",
+      "temperature": 0.3,
+      "top_p": 1,
+      "managed_agents": [
+        "6982de51e35d4557a9b57844",
+        "6982de391d2d8a7bf2fe5b09",
+        "6982de631ae7615e896e00f0"
+      ],
+      "response_schema_file": "response_schemas/ci_orchestrator_manager_response.json"
+    },
+    {
+      "agent_id": "6982de51e35d4557a9b57844",
+      "name": "Web Research Agent",
+      "type": "subagent",
+      "description": "Real-time Competitive Web Intelligence Specialist",
+      "role": "Real-time Competitive Web Intelligence Specialist",
+      "goal": "Gather latest news, updates, product launches, and market signals about competitors from web sources",
+      "provider": "OpenAI",
+      "model": "gpt-4o",
+      "temperature": 0.5,
+      "top_p": 0.95,
+      "tools": [
+        {
+          "tool_name": "perplexity_search",
+          "tool_source": "composio",
+          "action_names": ["PERPLEXITY_SEARCH"]
+        }
+      ],
+      "response_schema_file": "response_schemas/web_research_agent_response.json"
+    },
+    {
+      "agent_id": "6982de391d2d8a7bf2fe5b09",
+      "name": "Product Intelligence Agent",
+      "type": "subagent",
+      "description": "Competitor Product & Feature Analysis Expert",
+      "role": "Competitor Product & Feature Analysis Expert",
+      "goal": "Analyze competitor product capabilities, positioning, and feature sets using knowledge base of competitor documentation",
+      "provider": "OpenAI",
+      "model": "gpt-4o",
+      "temperature": 0.4,
+      "top_p": 0.95,
+      "has_knowledge_base": true,
+      "rag_id": "6982de2d7311df9b1f064397",
+      "rag_name": "competitorprofilesru1x",
+      "knowledge_base_name": "Competitor Profiles",
+      "response_schema_file": "response_schemas/product_intelligence_agent_response.json"
+    },
+    {
+      "agent_id": "6982de631ae7615e896e00f0",
+      "name": "Market Signals Agent",
+      "type": "subagent",
+      "description": "Strategic Prediction & Market Trend Analyst",
+      "role": "Strategic Prediction & Market Trend Analyst",
+      "goal": "Synthesize intelligence to predict competitor next moves and strategic direction",
+      "provider": "OpenAI",
+      "model": "gpt-4o",
+      "temperature": 0.6,
+      "top_p": 0.95,
+      "tools": [
+        {
+          "tool_name": "perplexity_reasoning",
+          "tool_source": "composio",
+          "action_names": ["PERPLEXITY_REASONING"]
+        }
+      ],
+      "response_schema_file": "response_schemas/market_signals_agent_response.json"
+    }
+  ],
+  "knowledge_bases": [
+    {
+      "rag_id": "6982de2d7311df9b1f064397",
+      "name": "Competitor Profiles",
+      "collection_name": "competitorprofilesru1x",
+      "description": "Competitor documentation, feature lists, positioning, and historical analysis for competitive intelligence",
+      "used_by_agents": ["6982de391d2d8a7bf2fe5b09"]
+    }
+  ],
+  "metadata": {
+    "created_at": "2026-02-04T00:00:00Z",
+    "total_agents": 4,
+    "manager_agents": 1,
+    "subagents": 3,
+    "knowledge_bases": 1,
+    "tools_used": ["perplexity_search", "perplexity_reasoning"]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "agent_name": "Product Intelligence Agent",
+  "agent_id": "6982de391d2d8a7bf2fe5b09",
+  "agent_purpose": "analyzer",
+  "description": "Competitor Product & Feature Analysis Expert that analyzes product capabilities and positioning",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "core_features": "string",
+      "positioning": "string",
+      "unique_differentiators": "string",
+      "gaps_vs_lyzr": "string"
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "core_features": "The sample data for testing does not directly provide detailed insights into competitor core features. Please analyze specific competitor products to determine their core features.",
+      "positioning": "Without detailed specifications or context, it's not possible to ascertain the product positioning of the sample data. Analyzing competitor marketing materials and target audience would provide better insights.",
+      "unique_differentiators": "The sample data lacks the specific content to highlight unique differentiators. Comparing it with known competitor features could help identify what stands out.",
+      "gaps_vs_lyzr": "This analysis would require a detailed look at Lyzr's offerings compared with the sample data; however, this sample doesn't offer explicit features or gaps."
+    },
+    "metadata": {
+      "agent_name": "Product Intelligence Agent",
+      "timestamp": "2023-10-04T16:51:25Z"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-02-04T05:54:39.592718",
+  "test_message_used": "Analyze this sample data for testing",
+  "actual_test_response": {
+    "status": "success",
+    "result": {
+      "core_features": "The sample data for testing does not directly provide detailed insights into competitor core features. Please analyze specific competitor products to determine their core features.",
+      "positioning": "Without detailed specifications or context, it's not possible to ascertain the product positioning of the sample data. Analyzing competitor marketing materials and target audience would provide better insights.",
+      "unique_differentiators": "The sample data lacks the specific content to highlight unique differentiators. Comparing it with known competitor features could help identify what stands out.",
+      "gaps_vs_lyzr": "This analysis would require a detailed look at Lyzr's offerings compared with the sample data; however, this sample doesn't offer explicit features or gaps."
+    },
+    "metadata": {
+      "agent_name": "Product Intelligence Agent",
+      "timestamp": "2023-10-04T16:51:25Z"
+    }
+  }
+}

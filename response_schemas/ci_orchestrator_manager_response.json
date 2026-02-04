@@ -1,0 +1,59 @@
+{
+  "agent_name": "CI Orchestrator Manager",
+  "agent_id": "6982de831ae7615e896e00f5",
+  "agent_purpose": "manager",
+  "description": "Competitive Intelligence Coordinator that orchestrates comprehensive competitive analysis",
+  "response_schema": {
+    "status": "string (success|error)",
+    "result": {
+      "final_output": "object (aggregated result from sub-agents)",
+      "sub_agent_results": [
+        {
+          "agent_name": "string",
+          "status": "string",
+          "output": "object"
+        }
+      ],
+      "summary": "string",
+      "workflow_completed": "boolean"
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string (ISO)",
+      "sub_agents_used": [
+        "string"
+      ]
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "final_output": {
+        "aggregated": "data from all sub-agents"
+      },
+      "sub_agent_results": [
+        {
+          "agent_name": "Sub-Agent 1",
+          "status": "success",
+          "output": {
+            "data": "result"
+          }
+        }
+      ],
+      "summary": "All sub-agents completed successfully",
+      "workflow_completed": true
+    },
+    "metadata": {
+      "agent_name": "CI Orchestrator Manager",
+      "timestamp": "2025-01-15T10:30:00Z",
+      "sub_agents_used": [
+        "Sub-Agent 1"
+      ]
+    }
+  },
+  "is_actual_tested": false,
+  "test_timestamp": null,
+  "test_message_used": "Process this request and coordinate sub-agents",
+  "raw_test_response": "Could you please specify the competitor or the type of analysis you would like me to conduct? This will allow me to coordinate the necessary sub-agents effectively.",
+  "test_error": "Response not valid JSON: Expecting value: line 1 column 1 (char 0)"
+}

@@ -1,0 +1,55 @@
+{
+  "agent_name": "Market Signals Agent",
+  "agent_id": "6982de631ae7615e896e00f0",
+  "agent_purpose": "recommendation",
+  "description": "Strategic Prediction & Market Trend Analyst that predicts competitor next moves",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "predicted_next_moves": "string",
+      "threat_analysis": "string",
+      "recommended_strategies": [
+        "string"
+      ]
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "predicted_next_moves": "Company X is likely to expand their product line to include AI-driven analytics features aimed at small to medium enterprises (SMEs). This prediction is based on recent trends and hiring patterns focusing on AI expertise.",
+      "threat_analysis": "The expansion of Company X into AI analytics could pose a competitive threat to Lyzr, particularly if they target the same mid-market segment. Their increased focus on AI could rapidly increase their market appeal and technological advantage.",
+      "recommended_strategies": [
+        "Enhance Lyzr's current offerings by integrating predictive analytics capabilities to match competitors' advances.",
+        "Increase investment in R&D specifically targeting the development of AI tools for market analytics.",
+        "Strengthen partnerships with third-party AI technology providers to amplify product capabilities swiftly."
+      ]
+    },
+    "metadata": {
+      "agent_name": "Market Signals Agent",
+      "timestamp": "2023-10-20T12:00:00Z"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-02-04T05:55:09.979895",
+  "test_message_used": "Provide sample recommendations for testing",
+  "actual_test_response": {
+    "status": "success",
+    "result": {
+      "predicted_next_moves": "Company X is likely to expand their product line to include AI-driven analytics features aimed at small to medium enterprises (SMEs). This prediction is based on recent trends and hiring patterns focusing on AI expertise.",
+      "threat_analysis": "The expansion of Company X into AI analytics could pose a competitive threat to Lyzr, particularly if they target the same mid-market segment. Their increased focus on AI could rapidly increase their market appeal and technological advantage.",
+      "recommended_strategies": [
+        "Enhance Lyzr's current offerings by integrating predictive analytics capabilities to match competitors' advances.",
+        "Increase investment in R&D specifically targeting the development of AI tools for market analytics.",
+        "Strengthen partnerships with third-party AI technology providers to amplify product capabilities swiftly."
+      ]
+    },
+    "metadata": {
+      "agent_name": "Market Signals Agent",
+      "timestamp": "2023-10-20T12:00:00Z"
+    }
+  }
+}
