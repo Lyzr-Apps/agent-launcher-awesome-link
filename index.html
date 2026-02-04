@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lyra App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- Vite Build Error Detection - Catches compile-time errors before React loads -->
+    <script>
+      (function() {
+        // Check if we're in an iframe
+        function isInIframe() {
+          try { return window.self !== window.top; }
+          catch (e) { return true; }
+        }
+
+        // Send error to parent iframe
+        function sendErrorToParent(errorDetails) {
+          if (!isInIframe()) return;
+          try {
+            window.parent.postMessage({
+              type: 'CHILD_APP_ERROR',
+              source: 'architect-child-app',
+              payload: errorDetails
+            }, '*');
+            // Also auto-request fix
+            window.parent.postMessage({
+              type: 'FIX_ERROR_REQUEST',
+              source: 'architect-child-app',
+              payload: {
+                ...errorDetails,
+                action: 'fix',
+                fixPrompt: 'Fix the following Vite build error:\n\n' +
+                  '**Error Type:** ' + errorDetails.type + '\n' +
+                  '**Error Message:** ' + errorDetails.message + '\n' +
+                  (errorDetails.stack ? '**Stack:** ```\n' + errorDetails.stack.substring(0, 1000) + '\n```\n' : '') +
+                  '\n**Instructions:** This is a compile-time error. Fix the code in the file mentioned.'
+              }
+            }, '*');
+            console.log('[ViteErrorDetector] Error sent to parent:', errorDetails.type);
+          } catch (e) {
+            console.error('[ViteErrorDetector] Failed to send:', e);
+          }
+        }
+
+        // Watch for Vite error overlay being added to DOM
+        var observer = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            mutation.addedNodes.forEach(function(node) {
+              // Vite uses vite-error-overlay custom element
+              if (node.nodeName === 'VITE-ERROR-OVERLAY') {
+                // Extract error from overlay
+                setTimeout(function() {
+                  var overlay = document.querySelector('vite-error-overlay');
+                  if (overlay && overlay.shadowRoot) {
+                    var messageEl = overlay.shadowRoot.querySelector('.message-body');
+                    var fileEl = overlay.shadowRoot.querySelector('.file');
+                    var frameEl = overlay.shadowRoot.querySelector('.frame');
+
+                    var message = messageEl ? messageEl.textContent : 'Vite build error';
+                    var file = fileEl ? fileEl.textContent : '';
+                    var frame = frameEl ? frameEl.textContent : '';
+
+                    sendErrorToParent({
+                      type: 'react_error',
+                      message: message + (file ? ' in ' + file : ''),
+                      stack: frame,
+                      timestamp: new Date().toISOString(),
+                      userAgent: navigator.userAgent,
+                      url: window.location.href
+                    });
+                  }
+                }, 100);
+              }
+            });
+          });
+        });
+
+        observer.observe(document.body, { childList: true, subtree: true });
+
+        // Also catch unhandled errors before React loads
+        window.addEventListener('error', function(event) {
+          // Check for common build/syntax errors
+          var msg = event.message || '';
+          if (msg.includes('Duplicate') ||
+              msg.includes('SyntaxError') ||
+              msg.includes('Unexpected token') ||
+              msg.includes('Cannot find module') ||
+              msg.includes('Failed to resolve') ||
+              msg.includes('transform failed')) {
+            sendErrorToParent({
+              type: 'react_error',
+              message: msg,
+              stack: event.error ? event.error.stack : '',
+              timestamp: new Date().toISOString(),
+              userAgent: navigator.userAgent,
+              url: window.location.href
+            });
+          }
+        });
+
+        // Intercept console.error for Vite/esbuild errors
+        var originalConsoleError = console.error;
+        console.error = function() {
+          originalConsoleError.apply(console, arguments);
+          var msg = Array.prototype.slice.call(arguments).join(' ');
+          // Detect Vite/build errors in console
+          if (msg.includes('[vite]') ||
+              msg.includes('[plugin:') ||
+              msg.includes('Duplicate declaration') ||
+              msg.includes('SyntaxError') ||
+              msg.includes('Transform failed') ||
+              msg.includes('Build failed')) {
+            sendErrorToParent({
+              type: 'react_error',
+              message: msg.substring(0, 1000),
+              stack: '',
+              timestamp: new Date().toISOString(),
+              userAgent: navigator.userAgent,
+              url: window.location.href
+            });
+          }
+        };
+      })();
+    </script>
+
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
