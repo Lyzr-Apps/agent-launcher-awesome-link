@@ -16,6 +16,11 @@ export default defineConfig({
     headers: {
       'Content-Security-Policy': "frame-ancestors *",
     },
+    hmr: {
+      protocol: 'wss',
+      host: 'preview--agent-launcher-awesome-link.app.architect.new',
+      clientPort: 443,
+    },
   },
   build: {
     outDir: 'dist',
